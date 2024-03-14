@@ -4,8 +4,7 @@
 // }
 
 class Model {
-  constructor({
-    //у модели есть методы:
+  constructor({ //у модели есть методы:
     onCurrentMemeIdChange,
     onMemesChange,
     onTextTopChange,
@@ -16,7 +15,7 @@ class Model {
     this.textTop = "";
     this.textBottom = "";
     this.isError = false;
-
+    
     this.onMemesChange = onMemesChange;//когда меняется то или иное, запускаются обработчики событий
     this.onCurrentMemeIdChange = onCurrentMemeIdChange;
     this.onTextTopChange = onTextTopChange;
@@ -48,12 +47,23 @@ class Model {
   }
 
   setTextTop(text) {
-  
+    // if (this._isTextTopValid(text) ) {
+    //   this.isError = false;
 
       this.textTop = text;
-   
-      this.onTextTopChange();
+    // } else {
+    //   this.isError = true;
+
+    // }
+      this.onTextTopChange(text);
+
   }
+  setError(isError) {
+    this.isError = true;
+    this.onTextTopChange(isError);
+    console.log(this.isError);
+  }
+
 
   setTextBottom(text) {
     this.textBottom = text;
@@ -81,5 +91,11 @@ class Model {
 
     return currentMeme;
   }
-
+  getIsError() {
+    return this.isError;
+    
+  }
+  // _isTextTopValid(textTop) {
+  //   return textTop.length < 5;
+  // }
 }

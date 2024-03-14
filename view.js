@@ -7,7 +7,8 @@ class View {
     this.previewTopTextNode = document.querySelector("#top");
     this.previewBottonTextNode = document.querySelector("#bottom");
 
-    // this.errorNode = document.querySelector("#eror");
+    this.errorNode = document.querySelectorAll("#error");
+    console.log(this.errorNode);
 
     this.onMemeChange = onMemeChange;
     //ты умеешь в случае изменения мема, вызвать функцию, передав в нее id выбранного мема
@@ -19,14 +20,30 @@ class View {
     this.inputBottomTextNode.addEventListener("change", this._hendlerTextBottomChange);
   
   }
-  renderPreview(preview, isError) { //отобрази превью
-    const { url, textTop, textBottom} = preview; // из объекта взять отдельные поля в отдельные переменные
- 
+  renderPreview(preview) { //отобрази превью
+    this._clearView();
+
+    const {url, textTop, textBottom} = preview; // из объекта взять отдельные поля в отдельные переменные
+   
     this.previewTopTextNode.innerText = textTop;
     this.previewBottonTextNode.innerText = textBottom;
     this.previewImageNode.src = url;
+    this.errorNode.innerText = 'Ошибка ввода';
+
   
   }
+  renderError(isError) {
+    if (isError) {
+      this.errorNode.innerText = 'Ошибка ввода';
+    }
+    // if (isError) {
+    //   // console.log('Ошибка ввода');
+    //   this.errorNode.innerText = 'Ошибка ввода';
+      
+     
+    // } return
+  }
+
 
   renderMemesSelect(memes, currentMemeId) {
     //отрисуй список мемов внутри тега select, нужно генерить в выпадающем списке
@@ -63,4 +80,9 @@ class View {
   _hendlerTextBottomChange = (event) => {
     this.onTextBottomChange(event.target.value);
   };
+  _clearView() {
+    this.inputTopTexttNode.innerHTML = '';
+    this.inputBottomTextNode.id = '';
+    this.errorNode.innerText = '';
+  }
 }

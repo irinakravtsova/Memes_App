@@ -1,13 +1,13 @@
 class Controller {
   constructor() {
-    this.model = new Model({
-      onMemesChange: this.handlerModelMemesChange, //модели добавь метод, который описывается функцией
+    this.model = new Model({ //модели добавь методы, которые описываются функциями (вызов рендера, когда происходят изменения в модели)
+      onMemesChange: this.handlerModelMemesChange, 
       onCurrentMemeIdChange: this.handlerModelCurentMemeIdChange,
       onTextTopChange: this.handlerModelTextTopChange,
       onTextBottomChange: this.handlerModelTextBottomChange,
     });
-    this.view = new View({
-      onMemeChange: this.handlerViewMemeChange,
+    this.view = new View({// вью добавь методы, которые описываются функциями сеттерами внесения изменений в данные, которые хранятся в модели)
+      onMemeChange: this.handlerViewMemeChange, 
       onTextTopChange: this.handlerViewTextTopChange,
       onTextBottomChange: this.handlerViewTextBottomChange,
     });
@@ -27,27 +27,38 @@ class Controller {
         this.model.setMemes(memes); //сеттим мемы в модель (устанавливаем значение) сохраняем в модели
       });
   }
-  handlerModelMemesChange = () => {//вызови рендер, когда произошли изменения в модели
-    this.view.renderMemesSelect(
-      this.model.getMemes(), 
-      this.model.getCurrentMemeId()
-    ); //отрисуй
+  handlerModelMemesChange = () => {//получил массив мемов, передай во вью и отрисуй список в поле селект, 
+    this.view.renderMemesSelect(this.model.getMemes(),  this.model.getCurrentMemeId());  
+   };
+
+  handlerModelCurentMemeIdChange = () => {//получил новый id мема,  выбранный из списка, передай во вью и отрисуй его в превью
+    this.view.renderPreview(this.model.getPreview()); 
   };
 
-  handlerViewMemeChange = (id) => {
-    //когда меняется мем во вью
-    this.model.setCurrentMemeId(id); //передай в модель id выбранного мема
+  handlerModelTextTopChange = () => {//получил новый текст1 от модели, передай и отрисуй в превью
+    this.view.renderPreview(this.model.getPreview());
+    console.log(this.model.getPreview());
+    this.view.renderError(this.model.getIsError())
+    console.log(this.model.getIsError());
+  };
+
+  handlerModelTextBottomChange = () => {//получил новый текст2 от модели,передай и  отрисуй в превью
+    this.view.renderPreview(this.model.getPreview());
+  };
+
+  
+  handlerViewMemeChange = (id) => {//пользователь выбрал новый мем из списка, передай в модель id выбранного мема модель изменит сеттером, передаст в контроллер изменения и следовательно запустится изменения во вью: 
+    this.model.setCurrentMemeId(id); 
   }; 
-  //и следовательно запустится изменения во вью:
 
-  handlerModelCurentMemeIdChange = () => {
-    //когда в модели меняется выбранный мем (меняется currentId),
-    this.view.renderPreview(this.model.getPreview()); //вызови рендер
-  };
-
-  handlerViewTextTopChange = (text) => {
+  handlerViewTextTopChange = (text, isError) => { //написали новый текст1, если он меньше 140 символов, то передай в модель текст, модель изменит сеттером, передаст в контроллер изменения и они запишутс в превью
         //проверка на количество символов
-    this.model.setTextTop(text);
+        if (text.length > 5) {  //если больше чем 140 символов, то скомандуй модели  изменить состояние на true, потом она передаст изменения в контроллер, и контроллер скомандует вью написать сообщение об ошибке
+          this.model.setError(isError);
+        
+        } else {
+          this.model.setTextTop(text);
+        }
   };
 
   handlerViewTextBottomChange = (text) => {
@@ -55,11 +66,5 @@ class Controller {
     this.model.setTextBottom(text);
   };
 
-  handlerModelTextTopChange = () => {
-    this.view.renderPreview(this.model.getPreview());
-  };
-
-  handlerModelTextBottomChange = () => {
-    this.view.renderPreview(this.model.getPreview());
-  };
+ 
 }
