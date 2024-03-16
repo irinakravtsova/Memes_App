@@ -1,5 +1,5 @@
 class View {
-  constructor({ onMemeChange, onTextTopChange, onTextBottomChange }) { //прокидываем обработчики, которые сообщают вовне о событиях
+  constructor({ onMemeChange, onTextTopChange, onTextBottomChange }) { //методы/обработчики, которые сообщают контроллеру о событиях
     this.selectNode = document.querySelector("#mem");
     this.inputTopTexttNode = document.querySelector("#textTop");
     this.inputBottomTextNode = document.querySelector("#textBottom");
@@ -7,41 +7,34 @@ class View {
     this.previewTopTextNode = document.querySelector("#top");
     this.previewBottonTextNode = document.querySelector("#bottom");
 
-    this.errorNode = document.querySelectorAll("#error");
-    console.log(this.errorNode);
+    this.errorNode = document.getElementById("error");
+    this.errorBottom = document.getElementById("errorBottom")
 
-    this.onMemeChange = onMemeChange;
-    //ты умеешь в случае изменения мема, вызвать функцию, передав в нее id выбранного мема
+    this.onMemeChange = onMemeChange;    //ты умеешь в случае изменения мема, вызвать функцию, передав в нее id выбранного мема
     this.onTextTopChange = onTextTopChange;
     this.onTextBottomChange = onTextBottomChange;
 
     this.selectNode.addEventListener("change", this._handlerSelectChange);
     this.inputTopTexttNode.addEventListener("change", this._handlerTextTopChange);
-    this.inputBottomTextNode.addEventListener("change", this._hendlerTextBottomChange);
+    this.inputBottomTextNode.addEventListener("change", this._handlerTextBottomChange);
   
+    // this.inputTopTexttNode.addEventListener("focus", this.clearView);
   }
   renderPreview(preview) { //отобрази превью
-    this._clearView();
-
     const {url, textTop, textBottom} = preview; // из объекта взять отдельные поля в отдельные переменные
    
     this.previewTopTextNode.innerText = textTop;
     this.previewBottonTextNode.innerText = textBottom;
     this.previewImageNode.src = url;
-    this.errorNode.innerText = 'Ошибка ввода';
-
-  
   }
-  renderError(isError) {
-    if (isError) {
-      this.errorNode.innerText = 'Ошибка ввода';
-    }
-    // if (isError) {
-    //   // console.log('Ошибка ввода');
-    //   this.errorNode.innerText = 'Ошибка ввода';
-      
-     
-    // } return
+  
+  renderTopError() {
+    this.errorNode.innerText += `Слишком много букав, убавь до 140 шт.`;
+   }
+
+  renderBottomError() {
+      this.errorBottom.innerText += `Слишком много букав, убавь до 140 шт.`; 
+   
   }
 
 
@@ -67,6 +60,7 @@ class View {
       this.selectNode.appendChild(optionNode); //добавь элемент к элементу selectNode
       //currentMemeId храни в model
     });
+   
   }
 //когда происходит событие, сообщи об этом вовне
   _handlerSelectChange = () => {
@@ -77,12 +71,8 @@ class View {
   _handlerTextTopChange = (event) => {
     this.onTextTopChange(event.target.value);
   };
-  _hendlerTextBottomChange = (event) => {
+  _handlerTextBottomChange = (event) => {
     this.onTextBottomChange(event.target.value);
   };
-  _clearView() {
-    this.inputTopTexttNode.innerHTML = '';
-    this.inputBottomTextNode.id = '';
-    this.errorNode.innerText = '';
-  }
+
 }

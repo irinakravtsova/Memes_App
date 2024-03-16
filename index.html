@@ -26,34 +26,30 @@
       <div class="wrapper">
         <div>
           <h2>Настройки:</h2>
-          <form action="">
-            <fieldset class="wrapper__settings">
-              <label for="">
-                Мем
-                <select name="mem" id="mem" class="mem"></select>
-              </label>
-              <label for="">
-                Текст сверху
-                <input
-                  type="text"
-                  name="text-on-top"
-                  id="textTop"
-                  class="input-text"
-                />
-                <p id="error" class="error"></p>
-              </label>
-              <label for="">
-                Текст снизу
-                <input
-                  type="text"
-                  name="bottom-text"
-                  id="textBottom"
-                  class="input-text"
-                />
-               <p id="error" class="error"></p>
-              </label>
-            </fieldset>
-          </form>
+          <div class="wrapper__settings">
+            <p class="name__setting">Мем</p>
+            <select name="mem" id="mem" class="mem"></select>
+            <p class="name__setting"> Текст сверху</p>
+            <input
+              type="text"
+              name="text-on-top"
+              id="textTop"
+              class="input-text"
+              placeholder="добавь текст max 140 символов"
+            />
+            <p id="error" class="error"></p>
+            <p class="name__setting"> Текст снизу</p>
+            <input
+              type="text"
+              name="bottom-text"
+              id="textBottom"
+              class="input-text"
+              placeholder="добавь текст max 140 символов"
+              value=""
+            />
+            <p id="errorBottom" class="error"></p>
+          </div>
+         
         </div>
         <div class="wrapper__preview">
           <h2>Превью:</h2>

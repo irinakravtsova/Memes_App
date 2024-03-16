@@ -9,17 +9,23 @@ class Model {
     onMemesChange,
     onTextTopChange,
     onTextBottomChange,
+    onStateTopChange,
+    onStateBottomChange,
+    
   }) {
     this.memes = []; //хранилка для мемов
     this.currentMemeId = null; //храни индекс выбранного мема по умолчанию значение null
-    this.textTop = "";
-    this.textBottom = "";
-    this.isError = false;
-    
+    this.textTop = " ";
+    this.textBottom = " ";
+    this.error = " ";
+     
     this.onMemesChange = onMemesChange;//когда меняется то или иное, запускаются обработчики событий
     this.onCurrentMemeIdChange = onCurrentMemeIdChange;
     this.onTextTopChange = onTextTopChange;
     this.onTextBottomChange = onTextBottomChange;
+    this.onStateTopChange = onStateTopChange;
+    this.onStateBottomChange = onStateBottomChange;
+   
   }
 
   getMemes() {
@@ -38,7 +44,6 @@ class Model {
 
   setCurrentMemeId(currentMemeId) {
     this.currentMemeId = currentMemeId;
-
     this.onCurrentMemeIdChange(); //каждый раз, как происходит изменение id (выбранного мема), вызывается функция
   }
 
@@ -47,40 +52,34 @@ class Model {
   }
 
   setTextTop(text) {
-    // if (this._isTextTopValid(text) ) {
-    //   this.isError = false;
-
-      this.textTop = text;
-    // } else {
-    //   this.isError = true;
-
-    // }
+         this.textTop = text;
       this.onTextTopChange(text);
 
   }
-  setError(isError) {
-    this.isError = true;
-    this.onTextTopChange(isError);
-    console.log(this.isError);
+ 
+  
+  setTopError(error) {
+    this.error = error;
+    this.onStateTopChange(error);
   }
-
 
   setTextBottom(text) {
     this.textBottom = text;
-
     this.onTextBottomChange();
   }
+  setBottomError(error) {
+    this.error = error;
+    this.onStateBottomChange(error);
+     }
 
-  getPreview = () => {
-    //напрямую из модели получить нельзя, пишем отдельный метод
+  getPreview = () => {//напрямую из модели получить нельзя, пишем отдельный метод
     return {
       textTop: this.textTop,
       textBottom: this.textBottom,
       url: this.getCurrentMeme().url,
     };
   };
-  getCurrentMeme() {
-    //достань текущий мем/объект
+  getCurrentMeme() {  //достань текущий мем/объект
     let currentMeme = null;
 
     this.memes.forEach((meme) => {
@@ -91,11 +90,5 @@ class Model {
 
     return currentMeme;
   }
-  getIsError() {
-    return this.isError;
-    
-  }
-  // _isTextTopValid(textTop) {
-  //   return textTop.length < 5;
-  // }
+
 }

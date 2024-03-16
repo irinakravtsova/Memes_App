@@ -17,20 +17,21 @@ h2 {
   gap: 222px;
 }
 
-form {
+.wrapper__settings {
   padding-top: 42px;
   font-weight: 400;
   color: #000;
 }
-label {
-  margin-bottom: 42px;
+.name__setting {
+  margin-bottom: 13px;
+  margin-top: 42px;
   display: block;
   font-size: 35px;
   cursor: auto;
 }
 input,
 select {
-  margin-top: 13px;
+ 
   padding-top: 12px;
   padding-bottom: 12px;
   padding-left: 21px;
@@ -49,6 +50,8 @@ select {
 }
 img {
   /* width: 100%; */
+  min-width: 560px;
+  min-height: 560px;
   display: block;
   object-fit: contain;
 }
