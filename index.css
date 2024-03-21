@@ -29,10 +29,10 @@ h2 {
   font-size: 35px;
   cursor: auto;
 }
-input,
-select {
- 
-  padding-top: 12px;
+
+select,
+.input-text {
+   padding-top: 12px;
   padding-bottom: 12px;
   padding-left: 21px;
   width: 393px;
@@ -41,26 +41,24 @@ select {
   border-radius: 15px;
   font-size: 25px;
 }
+
 .image {
-  width: 568px;
   margin-top: 76px;
   position: relative;
   display: block;
   text-align: center;
 }
 img {
-  /* width: 100%; */
-  min-width: 560px;
-  min-height: 560px;
   display: block;
   object-fit: contain;
 }
 
 .image-text_top,
 .image-text_bottom {
-  display: block;
+  display: inline-block;
   position: absolute;
-  left: 25%;
+  /* text-align: center; */
+  left: 50%;
   font-family: "IBM Plex Sans", sans-serif;
   font-weight: 400;
   font-size: 35px;
@@ -72,9 +70,22 @@ img {
 .image-text_bottom {
   bottom: 30px;
 }
+
 .error {
   margin-top: 10px;
   font-weight: 400;
   font-size: 25px;
   color: red;
+}
+label {
+ margin-bottom: 20px;
+  font-size: 30px;
+  padding-left: 10px;
+  margin-right: 20px;
+
+}
+.color__select {
+  display: flex;
+  flex-direction: column;
+ 
 }

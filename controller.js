@@ -7,12 +7,21 @@ class Controller {
       onTextBottomChange: this.handlerModelTextBottomChange,
       onStateTopChange: this.handlerModelStateTopChange,
       onStateBottomChange: this.handlerModelStateBottomChange,
-    
+      onTextTopClear: this.handlerModelTextTopClear,
+      onTextBottomClear: this.handlerModelTextBottomClear,
+      onTopColor: this.handlerModelTopColorChange,
+      onBottomColor: this.handlerModelBottomColorChange,
+      
     });
     this.view = new View({// вью добавь методы, которые описываются функциями сеттерами внесения изменений в данные, которые хранятся в модели)
       onMemeChange: this.handlerViewMemeChange, 
       onTextTopChange: this.handlerViewTextTopChange,
       onTextBottomChange: this.handlerViewTextBottomChange,
+      onTextTopClear: this.handlerViewTextTopClear,
+      onTextBottomClear: this.handlerViewTextBottomClear,
+      onTopColor: this.handlerViewTopColorChange,
+      onBottomColor: this.handlerViewBottomColorChange,
+
      
     });
     this.api = new API();
@@ -45,7 +54,7 @@ class Controller {
 
   handlerModelTextBottomChange = () => {//получил новый текст2 от модели,передай и  отрисуй в превью
     this.view.renderPreview(this.model.getPreview());
-  };
+   };
   
   handlerModelStateTopChange = (error)  => {
     this.view.renderTopError(error);
@@ -54,8 +63,19 @@ class Controller {
   handlerModelStateBottomChange = (error)  => {
     this.view.renderBottomError(error);
   }
-  handlerModelTopTextClear = () => {
-    this.view.clearView();
+
+  handlerModelTextTopClear = () => {
+    this.view.renderClear();
+  }
+  handlerModelTextBottomClear = () => {
+    this.view.renderBottomClear();
+  }
+
+  handlerModelTopColorChange = () => {
+    this.view.renderPreview(this.model.getPreview());
+  }
+  handlerModelBottomColorChange = () => {
+    this.view.renderPreview(this.model.getPreview());
   }
   
   handlerViewMemeChange = (id) => {//пользователь выбрал новый мем из списка, передай в модель id выбранного мема модель изменит сеттером, передаст в контроллер изменения и следовательно запустится изменения во вью: 
@@ -79,8 +99,20 @@ class Controller {
     } else {
       this.model.setTextBottom(text);
       }
-    
   };
 
- 
+  handlerViewTextTopClear = () => {
+  this.model.setTextTopClear();
+  }
+  handlerViewTextBottomClear = () => {
+  this.model.setTextBottomClear();
+  }
+
+  handlerViewTopColorChange = (color) => {
+    this.model.setTopColor(color);
+  }
+  handlerViewBottomColorChange = (color) => {
+    this.model.setBottomColor(color);
+  }
+
 }

@@ -11,21 +11,31 @@ class Model {
     onTextBottomChange,
     onStateTopChange,
     onStateBottomChange,
-    
+    onTextTopClear,
+    onTextBottomClear,
+    onTopColor,
+    onBottomColor
+   
   }) {
     this.memes = []; //хранилка для мемов
     this.currentMemeId = null; //храни индекс выбранного мема по умолчанию значение null
     this.textTop = " ";
     this.textBottom = " ";
     this.error = " ";
-     
+    this.topColor = "#ffffff";
+    this.bottomColor = "#ffffff";
+
+    
     this.onMemesChange = onMemesChange;//когда меняется то или иное, запускаются обработчики событий
     this.onCurrentMemeIdChange = onCurrentMemeIdChange;
     this.onTextTopChange = onTextTopChange;
     this.onTextBottomChange = onTextBottomChange;
     this.onStateTopChange = onStateTopChange;
     this.onStateBottomChange = onStateBottomChange;
-   
+    this.onTextTopClear = onTextTopClear;
+    this.onTextBottomClear = onTextBottomClear;
+    this.onTopColor = onTopColor;
+    this.onBottomColor = onBottomColor;
   }
 
   getMemes() {
@@ -52,31 +62,31 @@ class Model {
   }
 
   setTextTop(text) {
-         this.textTop = text;
-      this.onTextTopChange(text);
-
+      this.textTop = text;
+      this.onTextTopChange();
   }
- 
-  
-  setTopError(error) {
-    this.error = error;
-    this.onStateTopChange(error);
+   
+  setTopError() {
+    this.error ='error';
+    this.onStateTopChange(this.error);
   }
 
   setTextBottom(text) {
     this.textBottom = text;
     this.onTextBottomChange();
   }
-  setBottomError(error) {
-    this.error = error;
-    this.onStateBottomChange(error);
+  setBottomError() {
+    this.error = "много букв";
+    this.onStateBottomChange(this.error);
      }
-
+     
   getPreview = () => {//напрямую из модели получить нельзя, пишем отдельный метод
     return {
       textTop: this.textTop,
       textBottom: this.textBottom,
       url: this.getCurrentMeme().url,
+      topColor: this.topColor,
+      bottomColor: this.bottomColor,
     };
   };
   getCurrentMeme() {  //достань текущий мем/объект
@@ -91,4 +101,21 @@ class Model {
     return currentMeme;
   }
 
+  setTextTopClear() {
+      this.onTextTopClear();
+  }
+
+  setTextBottomClear() {
+     this.onTextBottomClear();
+  }
+
+  setTopColor(color) {
+    this.topColor = color;
+    this.onTopColor();
+  }
+
+  setBottomColor(color) {
+    this.bottomColor = color;
+    this.onBottomColor()
+  }
 }
