@@ -52,14 +52,17 @@ img {
   display: block;
   object-fit: contain;
 }
+.image__text-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .image-text_top,
 .image-text_bottom {
   display: inline-block;
   position: absolute;
-  /* text-align: center; */
-  left: 50%;
-  font-family: "IBM Plex Sans", sans-serif;
+   font-family: "IBM Plex Sans", sans-serif;
   font-weight: 400;
   font-size: 35px;
   color: #fff;
