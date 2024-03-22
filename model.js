@@ -46,7 +46,7 @@ class Model {
   setMemes(memes) {
     //сеттер - установи/измени значения сущностям из хранилки
     this.memes = memes; //измени мемы
-    this.currentMemeId = memes[0].id; //измени выбранный id, выбери из массива, который пришел из бекэнда первый мем и сохрани его id
+    this.currentMemeId = memes[28].id; //измени выбранный id, выбери из массива, который пришел из бекэнда первый мем и сохрани его id
 
     this.onMemesChange();
     this.onCurrentMemeIdChange();

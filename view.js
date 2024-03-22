@@ -24,8 +24,8 @@ class View {
     this.onBottomColor = onBottomColor;
 
     this.selectNode.addEventListener("change", this._handlerSelectChange);
-    this.inputTopTextNode.addEventListener("change", this._handlerTextTopChange);
-    this.inputBottomTextNode.addEventListener("change", this._handlerTextBottomChange);
+    this.inputTopTextNode.addEventListener("input", this._handlerTextTopChange);
+    this.inputBottomTextNode.addEventListener("input", this._handlerTextBottomChange);
     this.inputTopTextNode.addEventListener("click", this._clearView);
     this.inputBottomTextNode.addEventListener("click", this._clearBottomView);
     this.collorTopNode.addEventListener('input', this._handlerColorTopChange);
@@ -46,11 +46,11 @@ class View {
   }
   
   renderTopError() {
-    this.errorNode.innerText += `Слишком много букав, убавь до 140 шт.`;
+    this.errorNode.innerText += `Слишком много букав, убавь до 20 шт.`;
    }
 
   renderBottomError() {
-    this.errorBottom.innerText += `Слишком много букав, убавь до 140 шт.`; 
+    this.errorBottom.innerText += `Слишком много букав, убавь до 20 шт.`; 
   }
 
   renderClear() {
